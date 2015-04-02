@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project
+  before_action :set_project, except: :complete
   before_action :set_all_users, except: :destroy
   before_action :set_task, only: [:edit, :update, :destroy]
 
@@ -54,6 +54,17 @@ class TasksController < ApplicationController
       flash[:danger] = "You are not authorized to delete this task"
       redirect_to @project
     end
+  end
+
+  def complete
+    @task = Task.find(params[:id])
+    @task.complete? ? @task.complete = false : @task.complete = true
+    @task.save
+    respond_to do |format|
+      format.html { redirect_to request.referrer }
+      format.js
+    end
+    
   end
 
   private

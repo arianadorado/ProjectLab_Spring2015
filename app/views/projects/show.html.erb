@@ -1,5 +1,5 @@
 <div class = 'container'>
-	<h2>Project: <%= @project.name  %></h2>
+	<h2>Project: <%= @project.name %></h2>
 	<p>Description: <%= @project.description %></p>
 	<p>Due Date: <%= @project.due_date.strftime("%B %d, %Y, %I:%M %P") %></p>
 
@@ -18,6 +18,7 @@
           <th>Creator</th>
           <th>Assigned to</th>
           <th>Priority</th>
+          <th>Complete?</th>
           <th></th>
         </tr>
       </thead>
@@ -27,14 +28,11 @@
             <td><%= task.name %></td>
             <td><%= task.description %></td>
             <td><%= task.due_date.strftime("%B %d, %Y, %I:%M %P") %></td>
-            <% if task.complete == true %>
-              <td><%= "Completed!" %></td>
-            <% else %>  
-              <td><%= distance_of_time_in_words_to_now(task.due_date) %></td>
-            <% end %> 
+            <td id="timeLeft-<%= task.id %>"><%= time_left(task) %></td>
             <td><%= task.user.first_name %> <%= task.user.last_name %></td>
             <td><%= task.assignee.first_name %> <%= task.assignee.last_name %></td>
             <td><%= task.priority.capitalize %> </td>
+            <td id="completeBtn-<%= task.id %>"><%= complete_button(task) %></td>
             <td>
               <div class="btn-group btn-group-xs">
                 <% if current_user.id == task.assigned_user_id || current_user.id == task.user_id %>
