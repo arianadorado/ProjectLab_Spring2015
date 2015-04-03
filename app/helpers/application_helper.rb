@@ -2,9 +2,9 @@ module ApplicationHelper
 
   def complete_button(task)
     if task.complete?
-      link_to fa_icon('check-square-o'), complete_path(task), remote: true, class: 'btn btn-primary btn-xs'
+      link_to fa_icon('thumbs-o-up'), complete_path(task), remote: true, class: 'btn btn-primary btn-xs'
     else
-      link_to fa_icon('square-o'), complete_path(task), remote: true, class: 'btn btn-default btn-xs'
+      link_to fa_icon('thumbs-o-down'), complete_path(task), remote: true, class: 'btn btn-default btn-xs'
     end
   end
 
