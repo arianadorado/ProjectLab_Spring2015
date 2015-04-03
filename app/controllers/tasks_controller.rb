@@ -58,13 +58,11 @@ class TasksController < ApplicationController
 
   def complete
     @task = Task.find(params[:id])
-    @task.complete = !@task.complete
-    @task.save
+    @task.toggle
     respond_to do |format|
       format.html { redirect_to request.referrer }
       format.js
     end
-    
   end
 
   private

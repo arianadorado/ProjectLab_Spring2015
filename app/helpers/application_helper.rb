@@ -2,9 +2,9 @@ module ApplicationHelper
 
   def complete_button(task)
     if task.complete?
-      link_to "Mark Incomplete", complete_path(task), remote: true
+      link_to "Complete", complete_path(task), remote: true, class: 'btn btn-primary'
     else
-      link_to "Mark Complete", complete_path(task), remote: true
+      link_to "Incomplete", complete_path(task), remote: true, class: 'btn btn-danger'
     end
   end
 
