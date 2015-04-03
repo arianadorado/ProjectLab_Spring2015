@@ -58,7 +58,7 @@ class TasksController < ApplicationController
 
   def complete
     @task = Task.find(params[:id])
-    @task.complete? ? @task.complete = false : @task.complete = true
+    @task.complete = !@task.complete
     @task.save
     respond_to do |format|
       format.html { redirect_to request.referrer }
