@@ -29,7 +29,11 @@ class ProjectsController < ApplicationController
   def edit
     if current_user.id != @project.user_id
       flash[:danger] = "You are not authorized to edit this project."
-      redirect_to projects_path
+      
+    end
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.js
     end
   end
 
