@@ -6,15 +6,15 @@
   <h2>
   Tasks: 
   
-    <button type="button" class="btn" data-toggle="modal" data-target="#taskModal">
+    <button type="button" class="btn" data-toggle="modal" data-target="#newTaskModal">
       Add Task
     </button>
   </h2>
 
   <!-- Button trigger modal -->
 
-    <!-- Modal -->
-  <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- New Task Modal -->
+  <div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -24,6 +24,25 @@
         <div class="modal-body">
 
           <%= render partial: 'tasks/task_form', locals: {:task => @project.tasks.build }%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Edit Task Modal -->
+  <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
+        </div>
+        <div id="editModalBody" class="modal-body">
+         
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -64,7 +83,9 @@
             <td>  
               <div class="btn-group btn-group-xs">
                 <% if current_user.id == task.assigned_user_id || current_user.id == task.user_id %>
-                  <%= link_to 'Edit', edit_project_task_path(@project, task), class: "btn" %>
+                 
+                 <!--  <a data-toggle="modal" data-target="#editTaskModal" data-remote="<%= edit_project_task_path(@project, task) %> #modal-edit-fields" class="btn btn-link"> Edit </a> -->
+                  <%= link_to 'Edit', edit_project_task_path(@project, task), remote: true, class: "btn" %>
                   <%= link_to 'Delete', project_task_path(@project, task), data: { confirm: "Are you sure?" }, 
                                                  method: :delete, class: "btn" %>
                 <% end %>
