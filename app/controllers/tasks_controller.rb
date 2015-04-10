@@ -13,7 +13,10 @@ class TasksController < ApplicationController
        current_user.id == @task.user_id
     else
       flash[:danger] = "You are not authorized to edit this task"
-      redirect_to @project
+      respond_to do |format|
+        format.html { redirect_to @project }
+        format.js
+      end
     end
   end
 

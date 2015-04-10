@@ -32,7 +32,7 @@
 				  	<div class="btn-group btn-group-xs">
 							<%= link_to 'View', project_path(project), class: "btn" %>
 							<% if user_signed_in? && current_user.id == project.user_id %>
-								<%= link_to 'Edit', edit_project_path(project), remote: true,class: "btn" %>
+								<%= link_to 'Edit', edit_project_path(project), class: "btn", remote: true %>
 								<%= link_to 'Delete', project, data: { confirm: "Are you sure you wish to delete this project?" }, 
 																						 method: :delete, class: "btn" %>
 							<% end %>
@@ -44,7 +44,7 @@
 	</table>
 </div>
 
-<!-- Project Modal -->
+<!-- New Project Modal -->
 <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
