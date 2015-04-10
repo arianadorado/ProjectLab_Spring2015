@@ -1,3 +1,7 @@
+User.destroy_all
+Project.destroy_all
+Task.destroy_all
+
 User.create!(first_name:  "Example",
              last_name: "User",
              email: "example@projectman.net",
@@ -19,12 +23,20 @@ end
 users = User.all
 
 2.times do
-  name = Faker::Lorem.sentence(word_count=2)
-  description = Faker::Lorem.sentence
-  due_date = Faker::Date.forward(1)
   users.each do |user| 
+    name = Faker::Lorem.sentence(word_count=2)
+    description = Faker::Lorem.sentence
+    due_date = Faker::Date.forward(1)
     project = user.projects.create!(name: name, description: description, due_date: due_date)
-    project.tasks.create!(name: name, description: description, due_date: due_date, user_id: user.id, assigned_user_id: users.sample.id)
+  end
+end
+
+Project.all.each do |project|
+  10.times do
+    name = Faker::Lorem.sentence(word_count=1)
+    description = Faker::Lorem.sentence
+    due_date = Faker::Date.forward(1)
+    project.tasks.create!(name: name, description: description, priority: rand(4), due_date: due_date, user_id: users.sample.id, assigned_user_id: users.sample.id )
   end
 end
 

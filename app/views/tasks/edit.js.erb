@@ -1,0 +1,4 @@
+console.log('Its working');
+$('#taskModalLabel').html("New Task");
+$('#taskModalBody').html('<%= j render partial: 'tasks/task_form', locals: {:task => @task }%>');
+$('#taskModal').modal('show');
