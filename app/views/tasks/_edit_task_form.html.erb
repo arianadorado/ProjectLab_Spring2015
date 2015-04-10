@@ -1,0 +1,44 @@
+<!-- <div id="modal-edit-fields"> -->
+<div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
+        </div>
+        <div class="modal-body">
+				  <div class="form-group">
+						<%= form_for [@project, task] do |f| %>
+							<%= render 'devise/shared/error_messages', object: f.object %>
+							<%= f.label :name	 %> 
+						  <%= f.text_field :name, class: 'form-control' %>
+
+							<%= f.label :description %> 
+						  <%= f.text_area :description, class: 'form-control'  %>
+
+						  <%= f.label :due_date %> 
+							<%= f.datetime_select :due_date, class: 'form-control'  %>
+
+							<% if task.user_id == nil || task.user_id = current_user.id%>
+							<%= f.hidden_field :user_id, value: current_user.id, class: 'form-control'  %>	  
+							<% end %>
+						  		  
+						  <b>Assign to</b>
+						  <%= f.select(:assigned_user_id, User.all.map{|u| [ u.first_name + " " + u.last_name, u.id ] }) %>
+
+							<%= f.label :priority %>
+							<%= f.select :priority, Task.priorities.keys.map { |s| [s.humanize, s] }, class: "form-control" %>		
+
+							<%= f.label :complete %> 
+							<%= f.check_box :complete %>   
+
+						  <%= f.submit "Submit", class: "btn submit-btn"  %>
+						<% end %>
+					</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+<!-- </div> -->
