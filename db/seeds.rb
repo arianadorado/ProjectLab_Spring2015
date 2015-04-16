@@ -22,7 +22,7 @@ end
 
 users = User.all
 
-2.times do
+10.times do
   users.each do |user| 
     name = Faker::Lorem.sentence(word_count=2)
     description = Faker::Lorem.sentence
@@ -32,7 +32,7 @@ users = User.all
 end
 
 Project.all.each do |project|
-  10.times do
+  50.times do
     name = Faker::Lorem.sentence(word_count=1)
     description = Faker::Lorem.sentence
     due_date = Faker::Date.forward(1)
